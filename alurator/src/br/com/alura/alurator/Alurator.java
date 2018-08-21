@@ -18,11 +18,17 @@ public class Alurator {
 		
 		String[] path = url.replaceFirst("/", "").split("/");
 		
-		String controllerName = path[0] + "Controller";
+		String controllerName = path[0] + "." + "Controller";
 		
 		try {
 			Class<?> controllerClass = Class.forName(basePackage + controllerName);
-		} catch (ClassNotFoundException e) {
+			
+			Object controllerInstance = controllerClass.newInstance();
+			
+			System.out.println(controllerInstance);
+			
+			
+		} catch (ClassNotFoundException  | InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new RuntimeException();
